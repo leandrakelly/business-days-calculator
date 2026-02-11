@@ -3,7 +3,7 @@ export default function JsonLd() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     name: "Calculadora de Dias Úteis",
-    url: "https://diasuteis.com.br", // TODO: change later
+    url: "https://business-days-calculator.vercel.app",
     description:
       "Ferramenta para calcular datas finais somando dias úteis e ignorando feriados.",
     applicationCategory: "BusinessApplication",
