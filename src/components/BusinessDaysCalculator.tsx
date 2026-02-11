@@ -363,7 +363,7 @@ export default function BusinessDaysCalculator({
                               ({format(day.date, "EEE", { locale: ptBR })})
                             </span>
                           </span>
-                          <span className="text-red-300 text-xs font-semibold px-2 py-0.5 bg-red-900/30 rounded-full text-right truncate ml-2 max-w-[150px]">
+                          <span className="text-red-300 text-xs font-semibold px-2 py-0.5 bg-red-900/30 rounded-full text-right ml-2 break-words">
                             {day.reason}
                           </span>
                         </li>
