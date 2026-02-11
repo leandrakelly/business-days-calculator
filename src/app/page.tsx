@@ -7,8 +7,8 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-slate-50">
-      <header className="bg-slate-900 text-white py-12 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#4b5563_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      <header className="bg-slate-900 text-white pt-16 pb-24 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#9ca3af_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-blue-600/20 rounded-full backdrop-blur-sm">
@@ -25,74 +25,94 @@ export default async function Home() {
         </div>
       </header>
 
-      <section className="max-w-4xl mx-auto px-4 -mt-8 relative z-20 pb-20">
+      <section className="max-w-4xl mx-auto px-4 -mt-16 relative z-20 pb-12">
         <BusinessDaysCalculator initialHolidays={initialHolidays} />
-
-        <article className="mt-16 max-w-3xl mx-auto prose prose-slate lg:prose-lg bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-          <h2 className="flex items-center gap-2 text-slate-800">
-            <ShieldCheck className="w-6 h-6 text-blue-600" />
-            Como nosso cálculo funciona?
-          </h2>
-          <p className="text-slate-600">
-            Nossa ferramenta foi desenvolvida para oferecer segurança jurídica e
-            operacional. Utilizamos uma abordagem híbrida:
-          </p>
-          <ul className="text-slate-600 space-y-2">
-            <li>
-              <strong>Integração Governamental:</strong> Conectamos em tempo
-              real com a BrasilAPI para obter o calendário oficial de feriados
-              nacionais fixos e móveis.
-            </li>
-            <li>
-              <strong>Flexibilidade Local:</strong> Sabemos que feriados
-              municipais impactam prazos. Por isso, permitimos a inclusão manual
-              de datas específicas da sua localidade.
-            </li>
-            <li>
-              <strong>Lógica Precisa:</strong> O algoritmo ignora
-              automaticamente finais de semana e as datas de feriado
-              identificadas, somando apenas os dias de efetivo trabalho.
-            </li>
-          </ul>
-        </article>
       </section>
 
-      <section className="max-w-3xl mx-auto px-4 py-12">
-        <h3 className="text-2xl font-bold text-slate-800 mb-6">
-          Perguntas Frequentes
-        </h3>
+      <article className="max-w-3xl mx-auto px-4 pb-20 prose prose-slate lg:prose-lg">
+        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+          <h2 className="flex items-center gap-3 text-slate-800 text-2xl font-bold mb-4 not-prose">
+            <ShieldCheck className="w-8 h-8 text-blue-600" />
+            Como nosso cálculo funciona?
+          </h2>
+          <p className="text-slate-600 mb-4">
+            Nossa ferramenta foi desenvolvida para oferecer segurança jurídica e
+            operacional. Utilizamos uma abordagem híbrida e transparente:
+          </p>
+          <ul className="space-y-3 text-slate-600 list-disc pl-5">
+            <li>
+              <strong className="text-slate-900">
+                Integração Governamental:
+              </strong>{" "}
+              Conectamos em tempo real com bases de dados oficiais para obter o
+              calendário de feriados nacionais.
+            </li>
+            <li>
+              <strong className="text-slate-900">Flexibilidade Local:</strong>{" "}
+              Sabemos que feriados municipais impactam prazos. Por isso,
+              permitimos a inclusão manual de datas específicas da sua cidade.
+            </li>
+            <li>
+              <strong className="text-slate-900">Algoritmo Verificado:</strong>{" "}
+              O sistema ignora automaticamente finais de semana e feriados
+              coincidentes, somando apenas os dias de efetivo trabalho.
+            </li>
+          </ul>
+        </div>
+      </article>
 
-        <div className="space-y-4">
-          <details className="group bg-white p-4 rounded-lg border border-slate-200 open:ring-2 open:ring-blue-100">
-            <summary className="font-semibold text-slate-700 cursor-pointer list-none flex justify-between items-center">
-              Como contar dias úteis no Excel?
-              <span className="group-open:rotate-180 transition-transform">
-                ▼
-              </span>
-            </summary>
-            <p className="mt-2 text-slate-600">
-              No Excel, você usa a fórmula{" "}
-              <code>=DIATRABALHO(data_inicial; dias; [feriados])</code>. Porém,
-              nossa calculadora online facilita isso pois já traz os feriados
-              nacionais atualizados automaticamente, sem você precisar criar
-              listas manuais.
-            </p>
-          </details>
+      <section className="bg-white border-t border-slate-200 py-16">
+        <div className="max-w-3xl mx-auto px-4">
+          <h3 className="text-2xl font-bold text-slate-800 mb-8 text-center">
+            Perguntas Frequentes
+          </h3>
 
-          <details className="group bg-white p-4 rounded-lg border border-slate-200 open:ring-2 open:ring-blue-100">
-            <summary className="font-semibold text-slate-700 cursor-pointer list-none flex justify-between items-center">
-              O sábado conta como dia útil?
-              <span className="group-open:rotate-180 transition-transform">
-                ▼
-              </span>
-            </summary>
-            <p className="mt-2 text-slate-600">
-              Para fins bancários e de prazos processuais (novo CPC), sábados
-              geralmente <strong>não</strong> contam como dias úteis. Nossa
-              calculadora pula sábados e domingos por padrão, mas você pode
-              ajustar isso se necessário.
-            </p>
-          </details>
+          <div className="space-y-4">
+            <details className="group bg-slate-50 p-5 rounded-xl border border-slate-200 open:ring-2 open:ring-blue-100 transition-all">
+              <summary className="font-semibold text-slate-800 cursor-pointer list-none flex justify-between items-center text-lg">
+                Como contar dias úteis no Excel?
+                <span className="group-open:rotate-180 transition-transform text-slate-400">
+                  ▼
+                </span>
+              </summary>
+              <div className="mt-3 text-slate-600 leading-relaxed border-t border-slate-200 pt-3">
+                <p>
+                  No Excel, você usa a fórmula{" "}
+                  <code className="bg-slate-200 px-1 py-0.5 rounded text-slate-800 font-mono text-sm">
+                    =DIATRABALHO(data_inicial; dias; [feriados])
+                  </code>
+                  .
+                </p>
+                <p className="mt-2">
+                  Porém, nossa calculadora online facilita isso pois já traz os
+                  feriados nacionais atualizados automaticamente, sem você
+                  precisar criar listas manuais de datas para excluir.
+                </p>
+              </div>
+            </details>
+
+            <details className="group bg-slate-50 p-5 rounded-xl border border-slate-200 open:ring-2 open:ring-blue-100 transition-all">
+              <summary className="font-semibold text-slate-800 cursor-pointer list-none flex justify-between items-center text-lg">
+                O sábado conta como dia útil?
+                <span className="group-open:rotate-180 transition-transform text-slate-400">
+                  ▼
+                </span>
+              </summary>
+              <div className="mt-3 text-slate-600 leading-relaxed border-t border-slate-200 pt-3">
+                <p>
+                  Depende do contexto. Para fins <strong>bancários</strong> e
+                  prazos processuais (novo CPC), sábados geralmente{" "}
+                  <strong>não</strong> contam como dias úteis.
+                </p>
+                <p className="mt-2">
+                  Nossa calculadora segue esse padrão (pula sábados e domingos),
+                  mas você pode marcar a opção &quot;Incluir Sábados&quot; nas
+                  configurações avançadas se o seu prazo for corrido ou de
+                  comércio.
+                </p>
+              </div>
+            </details>
+          </div>
         </div>
       </section>
     </main>
