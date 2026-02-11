@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://diasuteis.com.br/sitemap.xml", // TODO: change later
+    sitemap: "https://business-days-calculator.vercel.app/sitemap.xml",
   };
 }

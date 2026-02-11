@@ -19,25 +19,20 @@ export const metadata: Metadata = {
     title: "Calculadora de Dias Úteis - Rápida e Gratuita",
     description:
       "Precisa calcular um prazo? Some dias úteis ignorando feriados nacionais e municipais automaticamente.",
-    url: "https://diasuteis.com.br", // TODO: use real domain later
+    url: "https://business-days-calculator.vercel.app",
     siteName: "Calculadora Dias Úteis",
     locale: "pt_BR",
     type: "website",
-    // images: [
-    //   {
-    //     url: '/og-image.png', // TODO: create image
-    //     width: 1200,
-    //     height: 630,
-    //     alt: 'Preview da Calculadora',
-    //   },
-    // ],
+  },
+  verification: {
+    google: "-RInPCvwWMYGWmj3lxRiuf52K3ML81O1tZbh4r6jqpE",
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: "https://diasuteis.com.br",
+    canonical: "https://business-days-calculator.vercel.app",
   },
 };
 
