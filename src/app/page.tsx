@@ -1,40 +1,6 @@
 import BusinessDaysCalculator from "@/components/BusinessDaysCalculator";
 import { getNationalHolidays } from "@/services/holidayService";
 import { CalendarCheck2, ShieldCheck } from "lucide-react";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Calculadora de Dias Úteis 2026 | Com Feriados Nacionais e Municipais",
-  description:
-    "Calcule prazos processuais e datas de entrega exatas. Ferramenta gratuita que considera feriados nacionais (BrasilAPI) e permite adicionar feriados municipais.",
-  keywords: [
-    "calcular dias úteis",
-    "calculadora prazos",
-    "dias úteis excel",
-    "contagem de prazo",
-    "feriados 2026",
-  ],
-  authors: [{ name: "Seu Nome ou Nome do Projeto" }],
-  openGraph: {
-    title: "Calculadora de Dias Úteis - Rápida e Gratuita",
-    description:
-      "Precisa calcular um prazo? Some dias úteis ignorando feriados nacionais e municipais automaticamente.",
-    url: "https://business-days-calculator.vercel.app",
-    siteName: "Calculadora Dias Úteis",
-    locale: "pt_BR",
-    type: "website",
-  },
-  verification: {
-    google: "-RInPCvwWMYGWmj3lxRiuf52K3ML81O1tZbh4r6jqpE",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "https://business-days-calculator.vercel.app",
-  },
-};
 
 export default async function Home() {
   const initialHolidays = await getNationalHolidays();
