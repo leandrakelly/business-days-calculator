@@ -42,7 +42,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-slate-50">
       <header className="bg-slate-900 text-white py-12 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>{" "}
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#4b5563_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-blue-600/20 rounded-full backdrop-blur-sm">
