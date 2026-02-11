@@ -1,7 +1,8 @@
-import { useState, useCallback, useMemo } from "react";
-import { addBusinessDays, Holiday, CalculationResult } from "@/lib/calculator";
-import { getStateHolidays } from "@/services/holidayService";
-import { format, parseISO } from "date-fns";
+import { format, parseISO } from 'date-fns';
+import { useCallback, useMemo, useState } from 'react';
+
+import { addBusinessDays, CalculationResult, Holiday } from '@/lib/calculator';
+import { getStateHolidays } from '@/services/holidayService';
 
 interface CalculatorFormData {
   startDate: string;
@@ -17,9 +18,9 @@ interface UseBusinessDaysProps {
 
 export function useBusinessDays({ initialHolidays }: UseBusinessDaysProps) {
   const [formData, setFormData] = useState<CalculatorFormData>({
-    startDate: format(new Date(), "yyyy-MM-dd"),
+    startDate: format(new Date(), 'yyyy-MM-dd'),
     daysToAdd: 5,
-    selectedState: "",
+    selectedState: '',
     includeSaturdays: false,
     includeSundays: false,
   });
@@ -37,7 +38,7 @@ export function useBusinessDays({ initialHolidays }: UseBusinessDaysProps) {
     if (!date || !name) return;
     setCustomHolidays((prev) => [
       ...prev,
-      { date, name, type: "Municipal/Manual" },
+      { date, name, type: 'Municipal/Manual' },
     ]);
   }, []);
 

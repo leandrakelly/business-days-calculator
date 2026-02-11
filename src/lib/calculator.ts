@@ -1,4 +1,4 @@
-import { addDays, isSaturday, isSunday, format } from "date-fns";
+import { addDays, format, isSaturday, isSunday } from 'date-fns';
 
 export interface Holiday {
   date: string;
@@ -40,13 +40,13 @@ export function addBusinessDays(
       (isSun && !options.includeSundays);
 
     const holiday = holidays.find(
-      (h) => h.date === format(currentDate, "yyyy-MM-dd"),
+      (h) => h.date === format(currentDate, 'yyyy-MM-dd'),
     );
 
     if (isWeekendSkipped) {
       skippedDays.push({
         date: currentDate,
-        reason: isSat ? "Sábado" : "Domingo",
+        reason: isSat ? 'Sábado' : 'Domingo',
       });
     } else if (holiday) {
       skippedDays.push({
