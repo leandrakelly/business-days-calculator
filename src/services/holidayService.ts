@@ -1,3 +1,4 @@
+import { STATE_HOLIDAYS } from "@/data/stateHolidays";
 import { Holiday } from "@/lib/calculator";
 
 const CACHE_DURATION = 60 * 60 * 24; // 24 hours
@@ -27,7 +28,28 @@ export async function getNationalHolidays(): Promise<Holiday[]> {
       type: "Nacional",
     }));
   } catch (error) {
-    console.error("Erro no HolidayService:", error);
+    console.error("Error on HolidayService:", error);
     return [];
   }
+}
+
+export function getStateHolidays(uf: string): Holiday[] {
+  if (!uf || !STATE_HOLIDAYS[uf]) return [];
+
+  const currentYear = new Date().getFullYear();
+  const nextYear = currentYear + 1;
+
+  const holidaysCurrentYear = STATE_HOLIDAYS[uf].map((h) => ({
+    date: `${currentYear}-${h.date}`,
+    name: h.name,
+    type: `Estadual (${uf})`,
+  }));
+
+  const holidaysNextYear = STATE_HOLIDAYS[uf].map((h) => ({
+    date: `${nextYear}-${h.date}`,
+    name: h.name,
+    type: `Estadual (${uf})`,
+  }));
+
+  return [...holidaysCurrentYear, ...holidaysNextYear];
 }

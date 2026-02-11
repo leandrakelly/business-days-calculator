@@ -12,10 +12,19 @@ export interface CalculationResult {
   workingDays: number;
 }
 
+export interface CalculatorOptions {
+  includeSaturdays: boolean;
+  includeSundays: boolean;
+}
+
 export function addBusinessDays(
   startDate: Date,
   daysToAdd: number,
   holidays: Holiday[],
+  options: CalculatorOptions = {
+    includeSaturdays: false,
+    includeSundays: false,
+  },
 ): CalculationResult {
   let count = 0;
   let currentDate = startDate;
@@ -24,21 +33,25 @@ export function addBusinessDays(
   while (count < daysToAdd) {
     currentDate = addDays(currentDate, 1);
 
-    const isWeekend = isSaturday(currentDate) || isSunday(currentDate);
+    const isSat = isSaturday(currentDate);
+    const isSun = isSunday(currentDate);
+    const isWeekendSkipped =
+      (isSat && !options.includeSaturdays) ||
+      (isSun && !options.includeSundays);
 
     const holiday = holidays.find(
       (h) => h.date === format(currentDate, "yyyy-MM-dd"),
     );
 
-    if (isWeekend) {
+    if (isWeekendSkipped) {
       skippedDays.push({
         date: currentDate,
-        reason: isSaturday(currentDate) ? "Sábado" : "Domingo",
+        reason: isSat ? "Sábado" : "Domingo",
       });
     } else if (holiday) {
       skippedDays.push({
         date: currentDate,
-        reason: `Feriado: ${holiday.name}`,
+        reason: `Feriado (${holiday.type}): ${holiday.name}`,
       });
     } else {
       count++;

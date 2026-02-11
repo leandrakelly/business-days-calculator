@@ -1,17 +1,36 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { addBusinessDays, Holiday, CalculationResult } from "@/lib/calculator";
+import { getStateHolidays } from "@/services/holidayService";
 import { format, parseISO } from "date-fns";
+
+interface CalculatorFormData {
+  startDate: string;
+  daysToAdd: number;
+  selectedState: string;
+  includeSaturdays: boolean;
+  includeSundays: boolean;
+}
 
 interface UseBusinessDaysProps {
   initialHolidays: Holiday[];
 }
 
 export function useBusinessDays({ initialHolidays }: UseBusinessDaysProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<CalculatorFormData>({
     startDate: format(new Date(), "yyyy-MM-dd"),
     daysToAdd: 5,
+    selectedState: "",
+    includeSaturdays: false,
+    includeSundays: false,
   });
+
   const [customHolidays, setCustomHolidays] = useState<Holiday[]>([]);
+
+  const stateHolidays = useMemo(() => {
+    if (!formData.selectedState) return [];
+    return getStateHolidays(formData.selectedState);
+  }, [formData.selectedState]);
+
   const [result, setResult] = useState<CalculationResult | null>(null);
 
   const addCustomHoliday = useCallback((date: string, name: string) => {
@@ -30,22 +49,37 @@ export function useBusinessDays({ initialHolidays }: UseBusinessDaysProps) {
     if (!formData.startDate) return;
 
     const start = parseISO(formData.startDate);
-    const allHolidays = [...initialHolidays, ...customHolidays];
 
-    const calculation = addBusinessDays(start, formData.daysToAdd, allHolidays);
+    const allHolidays = [
+      ...initialHolidays,
+      ...stateHolidays,
+      ...customHolidays,
+    ];
+
+    const calculation = addBusinessDays(
+      start,
+      formData.daysToAdd,
+      allHolidays,
+      {
+        includeSaturdays: formData.includeSaturdays,
+        includeSundays: formData.includeSundays,
+      },
+    );
+
     setResult(calculation);
-  }, [formData, initialHolidays, customHolidays]);
+  }, [formData, initialHolidays, stateHolidays, customHolidays]);
 
-  const handleInputChange = (
-    field: keyof typeof formData,
-    value: string | number,
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+  const handleInputChange = useCallback(
+    (field: keyof CalculatorFormData, value: string | number | boolean) => {
+      setFormData((prev) => ({ ...prev, [field]: value }));
+    },
+    [],
+  );
 
   return {
     formData,
     customHolidays,
+    stateHolidays,
     result,
     actions: {
       handleInputChange,
